@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class GestuMenuSecondaryItemWidget<T> extends StatelessWidget {
+class GestuMenuSecondaryItemWidget<G> extends StatelessWidget {
   final String title;
-  final T index;
+  final G index;
   final bool isSelected;
   final IconData? prefixIconData;
   final IconData? suffixIconData;
-  final ValueChanged<T>? onTap;
+  final ValueChanged<G>? onTap;
   final bool isPrimary;
   final TextStyle? textStyle;
   final Color? selectedColor;
@@ -29,19 +29,20 @@ class GestuMenuSecondaryItemWidget<T> extends StatelessWidget {
     this.counter,
   });
 
-  GestuMenuSecondaryItemWidget copyWith({
+  GestuMenuSecondaryItemWidget<G> copyWith({
     TextStyle? textStyle,
     Color? selectedColor,
     Color? selectedTextColor,
     BoxDecoration? decoration,
+    ValueChanged<G>? onTap,
   }) {
-    return GestuMenuSecondaryItemWidget<T>(
+    return GestuMenuSecondaryItemWidget<G>(
       title: title,
       index: index,
       isSelected: isSelected,
       prefixIconData: prefixIconData,
       suffixIconData: suffixIconData,
-      onTap: onTap,
+      onTap: onTap ?? this.onTap,
       isPrimary: isPrimary,
       textStyle: this.textStyle ?? textStyle,
       selectedColor: this.selectedColor ?? selectedColor,

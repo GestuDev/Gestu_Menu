@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'gestu_menu_secondary_item.dart';
 
-class GestuMenuPrimaryItem extends StatefulWidget {
+class GestuMenuPrimaryItem<T> extends StatefulWidget {
   final IconData? prefixIconData;
   final String title;
   final List<Widget> items;
@@ -15,6 +15,8 @@ class GestuMenuPrimaryItem extends StatefulWidget {
   final Color? itemSelectedTextColor;
   final BoxDecoration? itemDecoration;
   final bool expandedIndicatorRight;
+  final ValueChanged<T>? onTap;
+
   const GestuMenuPrimaryItem({
     super.key,
     this.prefixIconData,
@@ -29,13 +31,13 @@ class GestuMenuPrimaryItem extends StatefulWidget {
     this.itemSelectedTextColor,
     this.itemDecoration,
     this.expandedIndicatorRight = false,
+    this.onTap,
   });
 
   @override
-  State<GestuMenuPrimaryItem> createState() => _GestuMenuPrimaryItemState();
+  State<GestuMenuPrimaryItem> createState() => _GestuMenuPrimaryItemState<T>();
 
-  GestuMenuPrimaryItem _copyWith({
-    TextStyle? titleStyle,
+  GestuMenuPrimaryItem<T> _copyWith({
     BoxDecoration? decoration,
     TextStyle? itemTextStyle,
     Color? itemSelectedColor,
@@ -56,12 +58,14 @@ class GestuMenuPrimaryItem extends StatefulWidget {
           this.itemSelectedTextColor ?? itemSelectedTextColor,
       itemDecoration: this.itemDecoration ?? itemDecoration,
       expandedIndicatorRight: expandedIndicatorRight,
+      onTap: this.onTap,
     );
   }
 }
 
-class _GestuMenuPrimaryItemState extends State<GestuMenuPrimaryItem> {
+class _GestuMenuPrimaryItemState<T> extends State<GestuMenuPrimaryItem<T>> {
   late bool isExpanded;
+
   @override
   void initState() {
     isExpanded = widget.initialExpanded;
@@ -160,16 +164,16 @@ class _GestuMenuPrimaryItemState extends State<GestuMenuPrimaryItem> {
             ...widget.items.map(
               (e) => Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: (e is GestuMenuSecondaryItemWidget)
+                child: (e is GestuMenuSecondaryItemWidget<T>)
                     ? e.copyWith(
                         textStyle: widget.itemTextStyle,
                         selectedColor: widget.itemSelectedColor,
                         selectedTextColor: widget.itemSelectedTextColor,
                         decoration: widget.itemDecoration,
+                        onTap: widget.onTap,
                       )
-                    : (e is GestuMenuPrimaryItem)
+                    : (e is GestuMenuPrimaryItem<T>)
                         ? e._copyWith(
-                            titleStyle: widget.itemTextStyle,
                             decoration: widget.itemDecoration,
                             itemTextStyle: widget.itemTextStyle,
                             itemSelectedColor: widget.itemSelectedColor,
@@ -187,9 +191,9 @@ class _GestuMenuPrimaryItemState extends State<GestuMenuPrimaryItem> {
 
   bool hasActiveItem(List<Widget> items) {
     for (var element in items) {
-      if (element is GestuMenuSecondaryItemWidget && element.isSelected) {
+      if (element is GestuMenuSecondaryItemWidget<T> && element.isSelected) {
         return true;
-      } else if (element is GestuMenuPrimaryItem &&
+      } else if (element is GestuMenuPrimaryItem<T> &&
           hasActiveItem(element.items)) {
         return true;
       }

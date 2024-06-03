@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Gestu Menu',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -42,6 +42,32 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          const SizedBox(height: 8),
+          GestuMenuPrimaryItem<String>(
+            title: 'Main Option',
+            prefixIconData: Icons.space_dashboard_outlined,
+            expandedIndicatorRight: true,
+            onTap: (value) {
+              debugPrint('action button: $value');
+            },
+            items: const [
+              GestuMenuSecondaryItemWidget(
+                prefixIconData: Icons.bubble_chart,
+                title: 'Menu Item Selected',
+                counter: 1,
+                isSelected: true,
+                index: 'hola',
+                // onTap: (value) {},
+              ),
+              GestuMenuSecondaryItemWidget(
+                prefixIconData: Icons.bar_chart_outlined,
+                title: 'Menu Item',
+                counter: 2,
+                index: 'Adios',
+                // onTap: (value) {},
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           Expanded(
             child: ListView(
