@@ -15,7 +15,7 @@ Agrega `gestu_menu` a tu archivo `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  gestu_menu: ^0.0.1
+  gestu_menu: ^0.0.2
 ```
 
 Ejecuta `flutter pub get` para instalar el paquete.

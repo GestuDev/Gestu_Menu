@@ -2,7 +2,7 @@ name: gestu_menu
 description: >
   A customizable and animated menu package for Flutter that provides primary
   and secondary menu items.
-version: 0.0.1
+version: 0.0.2
 homepage: https://gestu.dev
 repository: https://github.com/GestuDev/gestu_menu.git
 

@@ -2,21 +2,49 @@ import 'package:flutter/material.dart';
 
 import 'gestu_menu_secondary_item.dart';
 
+/// Widget for a primary menu item that can contain a list of secondary items or nested primary items.
+/// It can expand to show the secondary items and collapse to hide them.
 class GestuMenuPrimaryItem<T> extends StatefulWidget {
+  /// Optional icon to display before the title.
   final IconData? prefixIconData;
+
+  /// Title of the primary item.
   final String title;
+
+  /// List of items, either secondary or nested primary items.
   final List<Widget> items;
+
+  /// Style for the title text.
   final TextStyle? titleStyle;
+
+  /// Indicates if the item is a secondary item.
   final bool isSecondary;
+
+  /// Indicates if the item is initially expanded.
   final bool initialExpanded;
+
+  /// Decoration for the item's container.
   final BoxDecoration? decoration;
+
+  /// Style for the secondary item text.
   final TextStyle? itemTextStyle;
+
+  /// Color for the background of a selected item.
   final Color? itemSelectedColor;
+
+  /// Color for the text of a selected item.
   final Color? itemSelectedTextColor;
+
+  /// Decoration for the secondary items.
   final BoxDecoration? itemDecoration;
+
+  /// Indicates if the expanded indicator is on the right.
   final bool expandedIndicatorRight;
+
+  /// Callback that is called when the item is tapped.
   final ValueChanged<T>? onTap;
 
+  /// Constructor for GestuMenuPrimaryItem.
   const GestuMenuPrimaryItem({
     super.key,
     this.prefixIconData,
@@ -74,7 +102,7 @@ class _GestuMenuPrimaryItemState<T> extends State<GestuMenuPrimaryItem<T>> {
 
   @override
   Widget build(BuildContext context) {
-    bool isActive = hasActiveItem(widget.items);
+    bool isActive = _hasActiveItem(widget.items);
     BoxDecoration effectiveDecoration = widget.decoration ??
         BoxDecoration(
           borderRadius: BorderRadius.circular(8),
@@ -189,12 +217,12 @@ class _GestuMenuPrimaryItemState<T> extends State<GestuMenuPrimaryItem<T>> {
     );
   }
 
-  bool hasActiveItem(List<Widget> items) {
+  bool _hasActiveItem(List<Widget> items) {
     for (var element in items) {
       if (element is GestuMenuSecondaryItemWidget<T> && element.isSelected) {
         return true;
       } else if (element is GestuMenuPrimaryItem<T> &&
-          hasActiveItem(element.items)) {
+          _hasActiveItem(element.items)) {
         return true;
       }
     }

@@ -1,18 +1,44 @@
 import 'package:flutter/material.dart';
 
+/// Widget for a secondary menu item.
 class GestuMenuSecondaryItemWidget<G> extends StatelessWidget {
+  /// Title of the item.
   final String title;
+
+  /// Index of the item.
   final G index;
+
+  /// Indicates if the item is selected.
   final bool isSelected;
+
+  /// Optional icon to display before the title.
   final IconData? prefixIconData;
+
+  /// Optional icon to display after the title.
   final IconData? suffixIconData;
+
+  /// Callback that is called when the item is tapped.
   final ValueChanged<G>? onTap;
+
+  /// Indicates if the item is a primary item.
   final bool isPrimary;
+
+  /// Style for the text of the item.
   final TextStyle? textStyle;
+
+  /// Color for the background of a selected item.
   final Color? selectedColor;
+
+  /// Color for the text of a selected item.
   final Color? selectedTextColor;
+
+  /// Decoration for the item's container.
   final BoxDecoration? decoration;
+
+  /// Optional counter to display next to the item.
   final num? counter;
+
+  /// Constructor for GestuMenuSecondaryItemWidget.
   const GestuMenuSecondaryItemWidget({
     super.key,
     required this.title,
