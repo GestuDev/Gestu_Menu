@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Demo Menu Page'),
     );
   }
 }
@@ -88,6 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: (value) {},
                     ),
                   ],
+                ),
+                GestuMenuSecondaryItemWidget(
+                  isPrimary: true,
+                  prefixIconData: Icons.verified_user,
+                  title: 'Third Option',
+                  index: 2,
+                  onTap: (value) {},
                 ),
               ],
             ),
