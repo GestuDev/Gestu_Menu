@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'gestu_menu_item.dart';
+import 'gestu_menu_secondary_item.dart';
 
-class MenuWidget extends StatefulWidget {
+class GestuMenuPrimaryItem extends StatefulWidget {
   final IconData? prefixIconData;
   final String title;
   final List<Widget> items;
@@ -15,7 +15,7 @@ class MenuWidget extends StatefulWidget {
   final Color? itemSelectedTextColor;
   final BoxDecoration? itemDecoration;
   final bool expandedIndicatorRight;
-  const MenuWidget({
+  const GestuMenuPrimaryItem({
     super.key,
     this.prefixIconData,
     required this.title,
@@ -32,9 +32,9 @@ class MenuWidget extends StatefulWidget {
   });
 
   @override
-  State<MenuWidget> createState() => _MenuWidgetState();
+  State<GestuMenuPrimaryItem> createState() => _GestuMenuPrimaryItemState();
 
-  MenuWidget copyWith({
+  GestuMenuPrimaryItem _copyWith({
     TextStyle? titleStyle,
     BoxDecoration? decoration,
     TextStyle? itemTextStyle,
@@ -42,7 +42,7 @@ class MenuWidget extends StatefulWidget {
     Color? itemSelectedTextColor,
     BoxDecoration? itemDecoration,
   }) {
-    return MenuWidget(
+    return GestuMenuPrimaryItem(
       prefixIconData: prefixIconData,
       title: title,
       items: items,
@@ -60,7 +60,7 @@ class MenuWidget extends StatefulWidget {
   }
 }
 
-class _MenuWidgetState extends State<MenuWidget> {
+class _GestuMenuPrimaryItemState extends State<GestuMenuPrimaryItem> {
   late bool isExpanded;
   @override
   void initState() {
@@ -125,10 +125,6 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 ),
                                 const SizedBox(width: 8),
                               ],
-                              // if (widget.indicator != null) ...[
-                              //   widget.indicator!,
-                              //   const Gap(8),
-                              // ],
                               Text(
                                 widget.title,
                                 style: effectiveTextStyle,
@@ -164,15 +160,15 @@ class _MenuWidgetState extends State<MenuWidget> {
             ...widget.items.map(
               (e) => Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: (e is MenuItemWidget)
+                child: (e is GestuMenuSecondaryItemWidget)
                     ? e.copyWith(
                         textStyle: widget.itemTextStyle,
                         selectedColor: widget.itemSelectedColor,
                         selectedTextColor: widget.itemSelectedTextColor,
                         decoration: widget.itemDecoration,
                       )
-                    : (e is MenuWidget)
-                        ? e.copyWith(
+                    : (e is GestuMenuPrimaryItem)
+                        ? e._copyWith(
                             titleStyle: widget.itemTextStyle,
                             decoration: widget.itemDecoration,
                             itemTextStyle: widget.itemTextStyle,
@@ -191,9 +187,10 @@ class _MenuWidgetState extends State<MenuWidget> {
 
   bool hasActiveItem(List<Widget> items) {
     for (var element in items) {
-      if (element is MenuItemWidget && element.isSelected) {
+      if (element is GestuMenuSecondaryItemWidget && element.isSelected) {
         return true;
-      } else if (element is MenuWidget && hasActiveItem(element.items)) {
+      } else if (element is GestuMenuPrimaryItem &&
+          hasActiveItem(element.items)) {
         return true;
       }
     }

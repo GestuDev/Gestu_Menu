@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MenuItemWidget<T> extends StatelessWidget {
+class GestuMenuSecondaryItemWidget<T> extends StatelessWidget {
   final String title;
   final T index;
   final bool isSelected;
@@ -13,7 +13,7 @@ class MenuItemWidget<T> extends StatelessWidget {
   final Color? selectedTextColor;
   final BoxDecoration? decoration;
   final num? counter;
-  const MenuItemWidget({
+  const GestuMenuSecondaryItemWidget({
     super.key,
     required this.title,
     required this.index,
@@ -29,13 +29,13 @@ class MenuItemWidget<T> extends StatelessWidget {
     this.counter,
   });
 
-  MenuItemWidget copyWith({
+  GestuMenuSecondaryItemWidget copyWith({
     TextStyle? textStyle,
     Color? selectedColor,
     Color? selectedTextColor,
     BoxDecoration? decoration,
   }) {
-    return MenuItemWidget<T>(
+    return GestuMenuSecondaryItemWidget<T>(
       title: title,
       index: index,
       isSelected: isSelected,
